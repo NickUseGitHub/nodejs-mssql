@@ -15,8 +15,7 @@ const sequelize = new Sequelize(database, username, password, {
 app.get('/', async function (_, res) {
   const todoList = await sequelize.query("SELECT * FROM Todo", { type: QueryTypes.SELECT });
 
-  console.log('todoList', todoList);
-  res.send("hello world");
+  res.json(todoList);
 });
 
 const server = app.listen(3000, function () {
