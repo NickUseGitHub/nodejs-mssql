@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-mssql",
+  "version": "1.0.0",
+  "description": "example nodejs with mssql",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickUseGitHub/nodejs-mssql.git"
+  },
+  "author": "Chaiwat Tungtongsoontorn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickUseGitHub/nodejs-mssql/issues"
+  },
+  "homepage": "https://github.com/NickUseGitHub/nodejs-mssql#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "tedious": "^8.0.1"
+  }
+}
