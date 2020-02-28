@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import apis from '../utils/apis'
+import { apis, exportCsvOrExcel } from '../utils'
 import './App.css';
 
 const ExampleToast = ({ children }) => {
@@ -24,6 +24,15 @@ const ExampleToast = ({ children }) => {
     </>
   );
 };
+
+function handleButtonOnClick(data) {
+  return function(e) {
+    e.preventDefault()
+    if (!data || data.length === 0) return
+
+    exportCsvOrExcel(data)
+  }
+}
 
 const App = () => {
   const [todoList, setTodoList] = useState([])
@@ -45,7 +54,7 @@ const App = () => {
           </span>
         </ExampleToast>
   
-        <Button>Download</Button>
+        <Button onClick={handleButtonOnClick(todoList)}>Download</Button>
   
         <br />
         <br />
