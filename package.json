@@ -4,7 +4,9 @@
   "description": "example nodejs with mssql",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "dev": "node src/server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +19,17 @@
   },
   "homepage": "https://github.com/NickUseGitHub/nodejs-mssql#readme",
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
     "express": "^4.17.1",
+    "express-routes-mapper": "^1.1.0",
+    "next": "^9.2.2",
+    "react": "^16.13.0",
+    "react-bootstrap": "^1.0.0-beta.17",
+    "react-dom": "^16.13.0",
     "sequelize": "^5.21.5",
-    "tedious": "^8.0.1"
+    "tedious": "^8.0.1",
+    "xlsx": "^0.15.5"
   }
 }
