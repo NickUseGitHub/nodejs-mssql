@@ -34,7 +34,7 @@ export default function Todo({ todoList }) {
                 {todo.id}
               </TableCell>
               <TableCell align="right">{todo.name}</TableCell>
-              <TableCell align="right">{todo.idDone ? '√' : 'x'}</TableCell>
+              <TableCell align="right">{todo.isComplete ? '√' : 'x'}</TableCell>
             </TableRow>
           ))}
         </TableBody>
