@@ -1,7 +1,7 @@
 import React from 'react'
 import App from 'next/app'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+import Paperbase from '../components/layouts/Paperbase'
 
 class MyApp extends App {
   // Only uncomment this method if you have blocking data requirements for
@@ -18,7 +18,11 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props
-    return <Component {...pageProps} />
+    return (
+      <Paperbase>
+        <Component {...pageProps} />
+      </Paperbase>
+    )
   }
 }
 

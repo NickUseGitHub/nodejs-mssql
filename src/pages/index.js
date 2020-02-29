@@ -1,29 +1,42 @@
 import React, { useState, useEffect } from 'react';
-
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Toast from 'react-bootstrap/Toast';
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import { withStyles } from '@material-ui/core/styles';
+import SearchIcon from '@material-ui/icons/Search';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 import { apis, exportCsvOrExcel } from '../utils'
-import './App.css';
+import Todo from '../components/Todo'
 
-const ExampleToast = ({ children }) => {
-  const [show, toggleShow] = useState(true);
-
-  return (
-    <>
-      {!show && <Button onClick={() => toggleShow(true)}>Show Toast</Button>}
-      <Toast show={show} onClose={() => toggleShow(false)}>
-        <Toast.Header>
-          <strong className="mr-auto">React-Bootstrap</strong>
-        </Toast.Header>
-        <Toast.Body>{children}</Toast.Body>
-      </Toast>
-    </>
-  );
-};
+const styles = theme => ({
+  paper: {
+    maxWidth: 936,
+    margin: 'auto',
+    overflow: 'hidden',
+  },
+  searchBar: {
+    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+  },
+  searchInput: {
+    fontSize: theme.typography.fontSize,
+  },
+  block: {
+    display: 'block',
+  },
+  addUser: {
+    marginRight: theme.spacing(1),
+  },
+  contentWrapper: {
+    margin: '40px 16px',
+  },
+});
 
 function handleButtonOnClick(data) {
   return function(e) {
@@ -34,7 +47,8 @@ function handleButtonOnClick(data) {
   }
 }
 
-const App = () => {
+function Content(props) {
+  const { classes } = props;
   const [todoList, setTodoList] = useState([])
 
   useEffect(function() {
@@ -44,27 +58,45 @@ const App = () => {
   }, [])
 
   return (
-    <Container className="p-3">
-      <Jumbotron>
-        <h1 className="header">Welcome To React-Bootstrap</h1>
-        <ExampleToast className="toast">
-          We now have Toasts
-          <span role="img" aria-label="tada">
-            🎉
-          </span>
-        </ExampleToast>
-  
-        <Button onClick={handleButtonOnClick(todoList)}>Download</Button>
-  
-        <br />
-        <br />
-  
-        <ListGroup>
-          {todoList && todoList.map(({ id, name }) => <ListGroup.Item key={id}>{name}</ListGroup.Item>)}
-        </ListGroup>
-      </Jumbotron>
-    </Container>
-  )
+    <Paper className={classes.paper}>
+      <AppBar className={classes.searchBar} position="static" color="default" elevation={0}>
+        <Toolbar>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item>
+              <SearchIcon className={classes.block} color="inherit" />
+            </Grid>
+            <Grid item xs>
+              <TextField
+                fullWidth
+                placeholder="Search by email address, phone number, or user UID"
+                InputProps={{
+                  disableUnderline: true,
+                  className: classes.searchInput,
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <Button variant="contained" color="primary" className={classes.addUser} onClick={handleButtonOnClick(todoList)}>
+                Submit
+              </Button>
+              <Tooltip title="Reload">
+                <IconButton>
+                  <RefreshIcon className={classes.block} color="inherit" />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+      <div className={classes.contentWrapper}>
+        <Todo todoList={todoList} />
+      </div>
+    </Paper>
+  );
+}
+
+Content.propTypes = {
+  classes: PropTypes.object.isRequired,
 };
 
-export default App;
+export default withStyles(styles)(Content);
