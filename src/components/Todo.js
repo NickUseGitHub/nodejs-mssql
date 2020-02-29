@@ -14,15 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-function createData({ id, name, isDone }) {
-  return { id, name, isDone };
-}
-
-const rows = [
-  createData({ id: 1, name: 'test', isDone: true }),
-];
-
-export default function DenseTable() {
+export default function Todo({ todoList }) {
   const classes = useStyles();
 
   return (
@@ -32,17 +24,17 @@ export default function DenseTable() {
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell align="right">Name</TableCell>
-            <TableCell align="right">IsDone</TableCell>
+            <TableCell align="right">isComplete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
+          {todoList.map(todo => (
+            <TableRow key={todo.name}>
               <TableCell component="th" scope="row">
-                {row.id}
+                {todo.id}
               </TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.idDone ? '√' : 'x'}</TableCell>
+              <TableCell align="right">{todo.name}</TableCell>
+              <TableCell align="right">{todo.idDone ? '√' : 'x'}</TableCell>
             </TableRow>
           ))}
         </TableBody>
